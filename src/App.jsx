@@ -64,7 +64,7 @@ export function App() {
         config={config}
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, -1, 2.25]}>
-        the future starts today
+        info@timeoffprojects.be
       </Text>
       {/** Controls */}
       <OrbitControls

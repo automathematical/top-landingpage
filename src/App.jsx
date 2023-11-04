@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
-import './App.css'
 
 import { RGBELoader } from 'three-stdlib'
 import { Canvas, useLoader } from '@react-three/fiber'

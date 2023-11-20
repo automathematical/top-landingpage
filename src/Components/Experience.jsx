@@ -17,7 +17,7 @@ import {
 } from '@react-three/drei'
 import { useControls, button } from 'leva'
 
-export function App() {
+export function Experience() {
   const { autoRotate, shadow, ...config } = useControls({
     backside: true,
     backsideThickness: { value: 0.3, min: 0, max: 2 },
@@ -198,4 +198,4 @@ function Text({ children, config, font = '/Inter_Medium_Regular.json', ...props 
   )
 }
 
-export default App
+export default Experience

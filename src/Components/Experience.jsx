@@ -16,6 +16,8 @@ import {
   MeshTransmissionMaterial,
 } from '@react-three/drei'
 import { useControls, button } from 'leva'
+import { Suspense } from 'react'
+import { Loading } from './Loading'
 
 export function Experience() {
   const { autoRotate, shadow, ...config } = useControls({
@@ -59,82 +61,84 @@ export function Experience() {
         attach='background'
         args={['#f2f2f5']}
       />
-      {/** The text and the grid */}
-      <Text
-        config={config}
-        rotation={[-Math.PI / 2, 0, 0]}
-        position={[0, -1, 2.25]}>
-        info@timeoffprojects.be
-      </Text>
-      {/** Controls */}
-      <OrbitControls
-        autoRotate={autoRotate}
-        autoRotateSpeed={-0.5}
-        zoomSpeed={0.25}
-        minZoom={30}
-        maxZoom={60}
-        enablePan={true}
-        dampingFactor={0.05}
-        minPolarAngle={Math.PI / 3}
-        maxPolarAngle={Math.PI / 3}
-      />
-      {/** The environment is just a bunch of shapes emitting light. This is needed for the clear-coat */}
-      <Environment resolution={32}>
-        <group rotation={[-Math.PI / 4, -0.3, 0]}>
-          <Lightformer
-            intensity={20}
-            rotation-x={Math.PI / 2}
-            position={[0, 5, -9]}
-            scale={[10, 10, 1]}
-          />
-          <Lightformer
-            intensity={2}
-            rotation-y={Math.PI / 2}
-            position={[-5, 1, -1]}
-            scale={[10, 2, 1]}
-          />
-          <Lightformer
-            intensity={2}
-            rotation-y={Math.PI / 2}
-            position={[-5, -1, -1]}
-            scale={[10, 2, 1]}
-          />
-          <Lightformer
-            intensity={2}
-            rotation-y={-Math.PI / 2}
-            position={[10, 1, 0]}
-            scale={[20, 2, 1]}
-          />
-          <Lightformer
-            type='ring'
-            intensity={2}
-            rotation-y={Math.PI / 2}
-            position={[-0.1, -1, -5]}
-            scale={10}
-          />
-        </group>
-      </Environment>
-      {/** Soft shadows */}
-      <AccumulativeShadows
-        frames={100}
-        color={shadow}
-        colorBlend={5}
-        toneMapped={true}
-        alphaTest={0.9}
-        opacity={1}
-        scale={80}
-        position={[0, -1.01, 0]}>
-        <RandomizedLight
-          amount={4}
-          radius={10}
-          ambient={0.5}
-          intensity={1}
-          position={[0, 10, -10]}
-          size={30}
-          mapSize={1024}
-          bias={0.0001}
+      <Suspense fallback={<Loading />}>
+        {/** The text and the grid */}
+        <Text
+          config={config}
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[0, -1, 2.25]}>
+          info@timeoffprojects.be
+        </Text>
+        {/** Controls */}
+        <OrbitControls
+          autoRotate={autoRotate}
+          autoRotateSpeed={-0.5}
+          zoomSpeed={0.25}
+          minZoom={30}
+          maxZoom={60}
+          enablePan={true}
+          dampingFactor={0.05}
+          minPolarAngle={Math.PI / 3}
+          maxPolarAngle={Math.PI / 3}
         />
-      </AccumulativeShadows>
+        {/** The environment is just a bunch of shapes emitting light. This is needed for the clear-coat */}
+        <Environment resolution={32}>
+          <group rotation={[-Math.PI / 4, -0.3, 0]}>
+            <Lightformer
+              intensity={20}
+              rotation-x={Math.PI / 2}
+              position={[0, 5, -9]}
+              scale={[10, 10, 1]}
+            />
+            <Lightformer
+              intensity={2}
+              rotation-y={Math.PI / 2}
+              position={[-5, 1, -1]}
+              scale={[10, 2, 1]}
+            />
+            <Lightformer
+              intensity={2}
+              rotation-y={Math.PI / 2}
+              position={[-5, -1, -1]}
+              scale={[10, 2, 1]}
+            />
+            <Lightformer
+              intensity={2}
+              rotation-y={-Math.PI / 2}
+              position={[10, 1, 0]}
+              scale={[20, 2, 1]}
+            />
+            <Lightformer
+              type='ring'
+              intensity={2}
+              rotation-y={Math.PI / 2}
+              position={[-0.1, -1, -5]}
+              scale={10}
+            />
+          </group>
+        </Environment>
+        {/** Soft shadows */}
+        <AccumulativeShadows
+          frames={100}
+          color={shadow}
+          colorBlend={5}
+          toneMapped={true}
+          alphaTest={0.9}
+          opacity={1}
+          scale={80}
+          position={[0, -1.01, 0]}>
+          <RandomizedLight
+            amount={4}
+            radius={10}
+            ambient={0.5}
+            intensity={1}
+            position={[0, 10, -10]}
+            size={30}
+            mapSize={1024}
+            bias={0.0001}
+          />
+        </AccumulativeShadows>
+      </Suspense>
     </Canvas>
   )
 }

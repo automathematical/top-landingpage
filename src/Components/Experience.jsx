@@ -51,6 +51,7 @@ export function Experience() {
       link.click()
     }),
   })
+
   return (
     <Canvas
       shadows

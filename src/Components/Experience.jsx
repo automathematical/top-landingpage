@@ -68,7 +68,7 @@ export function Experience() {
           config={config}
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -1, 2.25]}>
-          info@timeoffprojects.be
+          Time oFF Projects
         </Text>
         {/** Controls */}
         <OrbitControls

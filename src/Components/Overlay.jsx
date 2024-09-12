@@ -14,6 +14,9 @@ export function Overlay() {
         <p>
           <a href=''>Digital Playground</a>
         </p>
+        <p>
+          <a href='https://github.com/automathematical/top-landingpage'>Get the code</a>
+        </p>
       </div>
       <div style={{ position: 'absolute', bottom: 40, left: 40, fontSize: '13px' }}>
         <p>

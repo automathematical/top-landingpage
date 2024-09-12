@@ -2,7 +2,7 @@ import React from 'react'
 import { useStore } from './store'
 
 export default function Input() {
-  const [text, setText] = React.useState('more coming soon!')
+  const [text, setText] = React.useState('write whatever')
 
   const handleChange = (event) => {
     setText(event.target.value)
@@ -13,8 +13,6 @@ export default function Input() {
     event.preventDefault()
     // Pass the text to another component or handle it as needed
     setData(text)
-    console.log(text)
-    return text
   }
 
   return (
@@ -26,7 +24,11 @@ export default function Input() {
             value={text}
             onChange={handleChange}
           />
-          <button type='submit'>Submit</button>
+          <button
+            placeholder='write whatever'
+            type='submit'>
+            Submit
+          </button>
         </form>
       </div>
     </>

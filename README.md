@@ -1,4 +1,4 @@
-Credits to Legendary Pmdrs
+Credits to Legendary Pmndrs
 https://r3f.docs.pmnd.rs/getting-started/examples
 
 # React + Vite

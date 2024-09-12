@@ -10,7 +10,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Experience />
+    <Experience text={'more coming soon!'} />
     <Overlay />
     <Leva hidden />
   </React.StrictMode>

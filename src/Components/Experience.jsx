@@ -18,8 +18,11 @@ import {
 import { useControls, button } from 'leva'
 import { Suspense } from 'react'
 import { Loading } from './Loading'
+import { useStore } from './store'
 
 export function Experience() {
+  const text = useStore((state) => state.data)
+
   const { autoRotate, shadow, ...config } = useControls({
     backside: true,
     backsideThickness: { value: 0.3, min: 0, max: 2 },
@@ -68,7 +71,7 @@ export function Experience() {
           config={config}
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -1, 2.25]}>
-          More content soon!
+          {text}
         </Text>
         {/** Controls */}
         <OrbitControls

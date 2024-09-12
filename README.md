@@ -1,3 +1,6 @@
+Credits to Legendary Pmdrs
+https://r3f.docs.pmnd.rs/getting-started/examples
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

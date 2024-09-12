@@ -17,7 +17,7 @@ export function Overlay() {
       </div>
       <div style={{ position: 'absolute', bottom: 40, left: 40, fontSize: '13px' }}>
         <p>
-          <a href=''>Time Off Projects</a>
+          <a href='https://timeoffprojects.com'>Time Off Projects</a>
         </p>
       </div>
       <Input />

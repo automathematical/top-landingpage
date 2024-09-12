@@ -1,7 +1,10 @@
 Credits to Legendary Pmndrs
 https://r3f.docs.pmnd.rs/getting-started/examples
 
-# React + Vite
+Tweaked:
+played around with the settings and added functionality to change the text with Zustand state-manager
+
+# React + Vite + React Three Fiber
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

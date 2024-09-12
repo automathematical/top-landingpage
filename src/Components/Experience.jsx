@@ -56,11 +56,11 @@ export function Experience() {
     <Canvas
       shadows
       orthographic
-      camera={{ position: [-15, 20, 20], zoom: 10 }}
+      camera={{ position: [-15, 20, 20], zoom: 30 }}
       gl={{ preserveDrawingBuffer: true }}>
       <color
         attach='background'
-        args={['#f2f2f5']}
+        args={['#fafafa']}
       />
       <Suspense fallback={<Loading />}>
         {/** The text and the grid */}
@@ -68,7 +68,7 @@ export function Experience() {
           config={config}
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -1, 2.25]}>
-          Time oFF Projects
+          More content soon!
         </Text>
         {/** Controls */}
         <OrbitControls

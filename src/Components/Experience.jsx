@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unknown-property */
 
 import { RGBELoader } from 'three-stdlib'
-import { Canvas, useLoader } from '@react-three/fiber'
+import { Canvas, useLoader, useThree } from '@react-three/fiber'
 import {
   Center,
   Text3D,
@@ -16,14 +16,58 @@ import {
   MeshTransmissionMaterial,
 } from '@react-three/drei'
 import { useControls, button } from 'leva'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Loading } from './Loading'
 import { useStore } from './store'
 
-export function Experience() {
-  const text = useStore((state) => state.data)
+function ResponsiveControls({ autoRotate }) {
+  const { camera } = useThree()
+  const [zoom, setZoom] = useState(30)
+  const [minZoom, setMinZoom] = useState(30)
+  const [maxZoom, setMaxZoom] = useState(60)
 
-  const { autoRotate, shadow, ...config } = useControls({
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setZoom(8) // Increased zoom for mobile
+        setMinZoom(8) // Higher minimum zoom for mobile
+        setMaxZoom(16) // Higher maximum zoom for mobile
+      } else {
+        setZoom(30)
+        setMinZoom(30)
+        setMaxZoom(60)
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    camera.zoom = zoom
+    camera.updateProjectionMatrix()
+  }, [zoom, camera])
+
+  return (
+    <OrbitControls
+      autoRotate={autoRotate}
+      autoRotateSpeed={-0.5}
+      zoomSpeed={0.25}
+      minZoom={minZoom}
+      maxZoom={maxZoom}
+      enablePan={true}
+      dampingFactor={0.05}
+      minPolarAngle={Math.PI / 3}
+      maxPolarAngle={Math.PI / 3}
+    />
+  )
+}
+
+export function Experience() {
+  const text = useStore(state => state.data)
+
+  const { autoRotate, ...config } = useControls({
     backside: true,
     backsideThickness: { value: 0.3, min: 0, max: 2 },
     samples: { value: 16, min: 1, max: 32, step: 1 },
@@ -47,10 +91,7 @@ export function Experience() {
       // Save the canvas as a *.png
       const link = document.createElement('a')
       link.setAttribute('download', 'canvas.png')
-      link.setAttribute(
-        'href',
-        document.querySelector('canvas').toDataURL('image/png').replace('image/png', 'image/octet-stream')
-      )
+      link.setAttribute('href', document.querySelector('canvas').toDataURL('image/png').replace('image/png', 'image/octet-stream'))
       link.click()
     }),
   })
@@ -63,7 +104,7 @@ export function Experience() {
       gl={{ preserveDrawingBuffer: true }}>
       <color
         attach='background'
-        args={['#fafafa']}
+        args={['#ffffff']}
       />
       <Suspense fallback={<Loading />}>
         {/** The text and the grid */}
@@ -74,17 +115,7 @@ export function Experience() {
           {text}
         </Text>
         {/** Controls */}
-        <OrbitControls
-          autoRotate={autoRotate}
-          autoRotateSpeed={-0.5}
-          zoomSpeed={0.25}
-          minZoom={30}
-          maxZoom={60}
-          enablePan={true}
-          dampingFactor={0.05}
-          minPolarAngle={Math.PI / 3}
-          maxPolarAngle={Math.PI / 3}
-        />
+        <ResponsiveControls autoRotate={autoRotate} />
         {/** The environment is just a bunch of shapes emitting light. This is needed for the clear-coat */}
         <Environment resolution={32}>
           <group rotation={[-Math.PI / 4, -0.3, 0]}>
@@ -124,11 +155,11 @@ export function Experience() {
         {/** Soft shadows */}
         <AccumulativeShadows
           frames={100}
-          color={shadow}
-          colorBlend={5}
+          color='transparent'
+          colorBlend={0}
           toneMapped={true}
           alphaTest={0.9}
-          opacity={1}
+          opacity={0}
           scale={80}
           position={[0, -1.01, 0]}>
           <RandomizedLight
@@ -147,7 +178,7 @@ export function Experience() {
   )
 }
 
-const Grid = ({ number = 23, lineWidth = 0.026, height = 0.5 }) => (
+const Grid = ({ number = 46, lineWidth = 0.026, height = 0.5 }) => (
   // Renders a grid and crosses as instances
   <Instances position={[0, -1.02, 0]}>
     <planeGeometry args={[lineWidth, height]} />
@@ -163,17 +194,14 @@ const Grid = ({ number = 23, lineWidth = 0.026, height = 0.5 }) => (
       ))
     )}
     <gridHelper
-      args={[100, 100, '#bbb', '#bbb']}
+      args={[200, 200, '#f0f0f0', '#f0f0f0']}
       position={[0, -0.01, 0]}
     />
   </Instances>
 )
 
 function Text({ children, config, font = '/Inter_Medium_Regular.json', ...props }) {
-  const texture = useLoader(
-    RGBELoader,
-    'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr'
-  )
+  const texture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
   return (
     <>
       <group>

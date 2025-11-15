@@ -49,7 +49,7 @@ const styles = {
 }
 
 export default function Input() {
-  const [text, setText] = React.useState('write whatever')
+  const [text, setText] = React.useState('Can not wait to try this out!')
   const [isFocused, setIsFocused] = React.useState(false)
   const [isHovered, setIsHovered] = React.useState(false)
 

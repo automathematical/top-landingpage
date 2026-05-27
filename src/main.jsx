@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import Experience from './Components/Experience.jsx'
 import { Overlay } from './Components/Overlay.jsx'
 import { Leva } from 'leva'
-import { Analytics } from '@vercel/analytics/next'
+import { Analytics } from '@vercel/analytics/react'
 
 import './index.css'
 

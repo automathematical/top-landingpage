@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom/client'
 import Experience from './Components/Experience.jsx'
 import { Overlay } from './Components/Overlay.jsx'
 import { Leva } from 'leva'
+import { Analytics } from '@vercel/analytics/next'
 
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Experience text={'more coming soon!'} />
+    <Experience text={'Runwell Studio'} />
     <Overlay />
     <Leva hidden />
-  </React.StrictMode>
+    <Analytics />
+  </React.StrictMode>,
 )

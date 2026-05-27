@@ -6,7 +6,7 @@ export function Overlay() {
       <div style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}></div>
       <div style={{ position: 'absolute', top: 40, left: 40, fontSize: '13px' }}>
         <p>
-          <a href='https://timeoffprojects.com/#contact'>Contact</a>
+          <a href='https://runwell.studio/about'>About</a>
         </p>
       </div>
       <div style={{ position: 'absolute', top: 40, right: 40, fontSize: '13px' }}>
@@ -16,7 +16,7 @@ export function Overlay() {
       </div>
       <div style={{ position: 'absolute', bottom: 40, left: 40, fontSize: '13px' }}>
         <p>
-          <a href='https://timeoffprojects.com'>Time Off Projects</a>
+          <a href='https://runwell.studio'>Runwell Studio</a>
         </p>
       </div>
       <Input />
